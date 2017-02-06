@@ -2,6 +2,7 @@
 using System.IO;
 using Ghostscript.NET;
 using Ghostscript.NET.Rasterizer;
+using System.Web;
 
 namespace ImageProcessor.Plugins.Pdf
 {
@@ -17,8 +18,7 @@ namespace ImageProcessor.Plugins.Pdf
             _desiredXDpi = xDpi;
             _desiredYDpi = yDpi;
 
-            _lastInstalledVersion = GhostscriptVersionInfo.GetLastInstalledVersion(
-                GhostscriptLicense.GPL | GhostscriptLicense.AFPL, GhostscriptLicense.GPL);
+            _lastInstalledVersion = new GhostscriptVersionInfo(new System.Version(0, 0, 0), HttpContext.Current.Server.MapPath("~/bin/gsdll32.dll"), string.Empty, GhostscriptLicense.GPL);
 
             _rasterizer = new GhostscriptRasterizer();
         }
